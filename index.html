@@ -1,5 +1,60 @@
 <html>
+<head>
+    <style>
+        .main {
+            max-width: 960px;
+            margin: 0 auto;
+            height: 80%;
+            max-height: 700px;
+        }
+    </style>
+</head>
 <body style='padding:0'>
-<iframe style="width:100%; height:100%;" id="ifplayer" allowfullscreen="true" frameborder="0" scrolling="no" src="http://sportzonline.pw/channels/hd/hd1.html "></iframe>
+    <h1></h1>
+    <h3>
+        <a href='/'>Refresh</a>
+    </h3>
+    <div class='topbar'>
+        <h2>Pick a source</h2>
+        <select id='sources'>
+        </select>
+    </div>
+    <div class='main'>
+        <iframe id='mainvid' style="width:100%; height:100%;" id="ifplayer" allowfullscreen="true" frameborder="0" scrolling="no" 
+        src="http://sportzonline.pw/channels/hd/hd1.html "></iframe>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var sources = [
+            {
+                "url": "http://sportzonline.pw/channels/hd/hd1.html",
+                "name": "sportzonline"
+            }
+        ];
+        $(function() {
+            var $source = $('#sources');
+            var $mainvid = $('#mainvid');
+
+            $.ajax({
+                method: 'GET',
+                url: 'https://api.myjson.com/bins/fzew6',
+                success: function(d) {
+                    var sources = JSON.parse(d);
+                    var options = [];
+                    for (var i=0; i<sources.length; i++){
+                        var source = sources[i];
+                        if (i===0) {
+                            $mainvid.attr('src', source);
+                        }
+                        options.push('<option value="'+ source.url +'">'+ source.name +'</option>');
+                    }
+                }
+            });
+            
+            $sources.on('change', function() {
+                $mainvid.attr('src', $sources.val());
+            });
+        });
+    </script>
 </body>
 </html>
