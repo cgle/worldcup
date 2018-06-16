@@ -18,7 +18,7 @@
     </div>
     <div class='main'>
         <iframe id='mainvid' style="width:100%; height:100%;" id="ifplayer" allowfullscreen="true" frameborder="0" scrolling="no" 
-        src="http://sportzonline.pw/channels/hd/hd1.html "></iframe>
+        src=""></iframe>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
@@ -34,9 +34,11 @@
 
             $.ajax({
                 method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",                
                 url: 'https://api.myjson.com/bins/fzew6',
                 success: function(d) {
-                    var sources = JSON.parse(d);
+                    var sources = d;
                     var options = [];
                     for (var i=0; i<sources.length; i++){
                         var source = sources[i];
