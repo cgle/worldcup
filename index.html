@@ -7,7 +7,7 @@
     </style>
 </head>
 <body style='padding:0'>
-    <h1></h1>
+    <h1>GAME: <span id='game'></span></h1>
     <h3>
         <a href='/'>Refresh</a>
     </h3>
@@ -29,19 +29,20 @@
             }
         ];
         $(function() {
+            var $game = $('#game');
             var $sources = $('#sources');
             var $mainvid = $('#mainvid');
 
             $.ajax({
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",                
-                url: 'https://api.myjson.com/bins/fzew6',
-                success: function(d) {
-                    var sources = d;
+                dataType: "json",
+                url: 'https://api.jsonbin.io/b/5b2525364e837b0ee86101d8/latest',
+                success: function(data) {
                     var options = [];
-                    for (var i=0; i<sources.length; i++){
-                        var source = sources[i];
+                    $game.html(data.game);
+                    for (var i=0; i<data.sources.length; i++){
+                        var source = data.sources[i];
                         if (i===0) {
                             $mainvid.attr('src', source.url);
                         }
