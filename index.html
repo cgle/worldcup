@@ -22,7 +22,7 @@
 <body style='padding:0'>
     <h1>GAME: <span id='game'></span></h1>
     <h3>
-        <a href='/'>Refresh</a>
+        <a id='refresh'>Refresh</a>
     </h3>
     <div class='topbar'>
         <h2>Pick a source</h2>
@@ -50,6 +50,10 @@
             var $game = $('#game');
             var $sources = $('#sources');
             var $mainvid = $('#mainvid');
+            
+            $('#refresh').on('click', function() {
+                document.getElementById('mainvid').contentWindow.location.reload();
+            });
 
             $.ajax({
                 method: 'GET',
